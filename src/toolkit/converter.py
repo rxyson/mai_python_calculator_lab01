@@ -39,8 +39,12 @@ def convert(value: float, from_unit: str, to_unit: str):
             return float(celsius + 273.15)
 
     if from_unit in LENGTH_UNITS and to_unit in LENGTH_UNITS:
+        if value < 0:
+            raise ValueError("Длина не может быть отрицательной")
         units = LENGTH_UNITS
     elif from_unit in MASS_UNITS and to_unit in MASS_UNITS:
+        if value < 0:
+            raise ValueError("Масса не может быть отрицательной")
         units = MASS_UNITS
     else:
         raise ValueError(f"Невозможно конвертировать между разными группами единиц: {from_unit} и {to_unit}")

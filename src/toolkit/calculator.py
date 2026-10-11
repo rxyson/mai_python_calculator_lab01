@@ -47,6 +47,7 @@ def tokenize(expression: str) -> list[tuple[str, str | float]]:
 
                 if char in "+-*/":
                     tokens.append(("OPERATOR", char))
+                    unary = True
                 elif char.isspace():
                     continue
                 else:

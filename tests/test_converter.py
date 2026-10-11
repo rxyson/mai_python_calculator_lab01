@@ -4,11 +4,15 @@ from toolkit.converter import convert
 
 
 def test_length_cm_to_m():
-    assert convert(100, "cm", "m") == 1.0
+    assert convert(300, "cm", "m") == 3.0
 
 
 def test_length_km_to_m():
     assert convert(2, "km", "m") == 2000.0
+
+
+def test_length_mm_to_m():
+    assert convert(5000, "mm", "m") == 5.0
 
 
 def test_mass_kg_to_g():
@@ -53,12 +57,20 @@ def test_incompatible_units():
     to_unit = "kg"
 
     with pytest.raises(
-        ValueError,
-        match=f"Невозможно конвертировать между разными группами единиц: {from_unit} и {to_unit}"
-        ):
+        ValueError, match=f"Невозможно конвертировать между разными группами единиц: {from_unit} и {to_unit}"):
         convert(1, from_unit, to_unit)
 
 
 def test_temperature_below_absolute_zero():
     with pytest.raises(ValueError, match="Температура ниже абсолютного нуля"):
         convert(-1, "k", "c")
+
+
+def test_negative_length():
+    with pytest.raises(ValueError, match="Длина не может быть отрицательной",):
+        convert(-1, "m", "cm")
+
+
+def test_negative_mass():
+    with pytest.raises(ValueError, match="Масса не может быть отрицательной",):
+        convert(-36, "kg", "g")
