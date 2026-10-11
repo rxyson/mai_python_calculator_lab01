@@ -9,6 +9,14 @@ from .errors import ToolkitError
 
 
 def main() -> int:
+
+    """Обрабатывает команды CLI и возвращает код завершения.
+
+    Returns:
+        0 при успешном выполнении команды;
+        2 при ошибке вычисления или преобразования.
+    """
+
     parser = argparse.ArgumentParser(
         prog="python -m toolkit",
         description="Калькулятор и конвертер единиц измерения",

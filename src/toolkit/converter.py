@@ -1,3 +1,5 @@
+"""Функции для преобразования единиц измерения."""
+
 LENGTH_UNITS = {
     "mm": 0.001,
     "cm": 0.01,
@@ -14,7 +16,12 @@ TEMPERATUE_UNITS = {"c", "f", "k"}
 
 all_units = set(LENGTH_UNITS) | set(MASS_UNITS) | set(TEMPERATUE_UNITS)
 
-def convert(value: float, from_unit: str, to_unit: str):
+def convert(value: float, from_unit: str, to_unit: str) -> float:
+
+    """Преобразует значение из одной единицы измерения в другую.
+    Поддерживает единицы длины, массы и температуры.
+    Названия единиц не зависят от регистра."""
+
     from_unit = from_unit.lower()
     to_unit = to_unit.lower()
 

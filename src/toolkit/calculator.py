@@ -1,4 +1,7 @@
+"""Функции для разбора и вычисления математических выражений."""
+
 def tokenize(expression: str) -> list[tuple[str, str | float]]:
+    """Разбивает математическое выражение на токены."""
     tokens: list[tuple[str, str | float]] = []
     state = "START"
     current_token = ""
@@ -66,6 +69,8 @@ def tokenize(expression: str) -> list[tuple[str, str | float]]:
     return tokens
 
 def validate(tokens: list[tuple[str, str | float]]) -> None:
+    """Проверяет последовательность токенов математического выражения.
+    Проверяет наличие чисел и допустимое расположение операторов."""
     if len(tokens) == 0:
         raise ValueError("Пустое выражение")
 
@@ -90,7 +95,9 @@ def validate(tokens: list[tuple[str, str | float]]) -> None:
         raise ValueError("Выражение не может заканчиваться оператором")
 
 
-def calculate(tokens):
+def calculate(tokens) -> float:
+    """Вычисляет выражение по последовательности проверенных токенов.
+    Сначала выполняет умножение и деление, затем сложение и вычитание."""
     result = tokens[0][1]
     priority = []
     i = 1
@@ -134,7 +141,10 @@ def calculate(tokens):
 
     return result
 
-def evaluate(expression):
+def evaluate(expression: str) -> float:
+    """Проверяет и вычисляет математическое выражение.
+    Последовательно разбивает выражение на токены, проверяет их
+    корректность и передаёт на вычисление."""
     tokens = tokenize(expression)
     validate(tokens)
     return calculate(tokens)
