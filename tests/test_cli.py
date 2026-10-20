@@ -18,7 +18,7 @@ def test_cli_calculate():
     )
 
     assert result.returncode == 0
-    assert result.stdout == "85.0\n"
+    assert result.stdout == "85\n"
     assert result.stderr == ""
 
 

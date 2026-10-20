@@ -33,12 +33,12 @@ def main() -> int:
     )
     calc_parser.add_argument(
         "expression",
-        help="Математическое выражение, например '2 + 3 * 4'",
+        help="Математическое выражение, например '(2 + 3) * 4'",
     )
 
     convert_parser = commands.add_parser(
         "convert",
-        help="Преобразовать значение между единицами",
+        help="Конвертировать значение из одной единицы в другую",
     )
     convert_parser.add_argument(
         "value",
@@ -49,16 +49,21 @@ def main() -> int:
         "--from",
         dest="from_unit",
         required=True,
-        help="Исходная единица измерения",
+        help="Начальная единица измерения",
     )
     convert_parser.add_argument(
         "--to",
         dest="to_unit",
         required=True,
-        help="Целевая единица измерения",
+        help="Новая единица измерения",
     )
 
-    args = parser.parse_args()
+    argv = sys.argv[1:]
+
+    if len(argv) >= 2 and argv[0] == "calc" and argv[1].startswith("-"):
+        argv.insert(1, "--")
+
+    args = parser.parse_args(argv)
 
     try:
         if args.command == "calc":
